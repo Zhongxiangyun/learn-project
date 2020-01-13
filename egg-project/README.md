@@ -96,7 +96,26 @@ module.exports = ProductService;
 ```js
 const res = await ctx.service.product.index();
 ```
+## 模板引擎
+- [地址](https://eggjs.org/zh-cn/core/view.html)
+- [ejs](https://ejs.bootcss.com/#promo)
+使用的是egg-view-ejs
+#### 我自己使用的是 egg-view
+- [地址](https://github.com/eggjs/egg-view)
 
+## 静态资源
+public 文件夹下
+
+## Mysql 使用
+- [egg-mysql](https://eggjs.org/zh-cn/tutorials/mysql.html)
+```bash
+npm i --save egg-mysql
+```
+
+### 对时间的处理
+```bash
+npm i --save moment
+```
 
 
 
