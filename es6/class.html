@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="canvas"></div>
+    <script>
+        class Test {
+            constructor(a = 'df', b = 'df') {
+                this.a = a
+                this.b = b
+                return this
+            }
+            print() {
+                // console.log(this.a + ' ' + this.b)
+            }
+
+        }
+        const demo1 = new Test('ni', 'hao').print()
+        // console.log(Test)
+        // 不可被 枚举 Object.keys()
+        /*
+        extends
+
+        static
+
+        super
+        
+        */
+        const canvas = document.createElement('canvas');
+        const canvasdemo = document.querySelector('#canvas')
+        canvasdemo.appendChild(canvas)
+        const ctx = canvas.getContext('2d')
+
+        const w = canvas.width = 600
+        const h = canvas.height = 400
+
+        // canvas.style.backgroundColor = '#4feff3'
+        // canvas.style.borderColor = '1px solid #0feff3'
+        canvas.style.border = '1px solid #0feff3'
+
+        // 声明 ball 类
+        class Ball {
+            constructor(x, y, r) {
+                this.x = x
+                this.y = y
+                this.r = r
+                // ~~去掉小数
+                this.color = `rgb(${~~Ball.rpFn([5, 255])},${~~Ball.rpFn([5, 255])},${~~Ball.rpFn([5, 255])})`
+            }
+            render(ctx) {
+                ctx.save()
+                ctx.translate(this.x, this.y);
+                ctx.fillStyle = this.color
+                ctx.beginPath()
+                ctx.arc(0, 0, this.r, 0, 2 * Math.PI)
+                ctx.fill()
+                ctx.restore()
+                return this;
+            }
+            // 静态方法  生成 随机数一定范围内的随机数  参数[start,end]
+            static rpFn(arr) {
+                let max = Math.max(...arr)
+                let min = Math.min(...arr)
+                return Math.random() * (max - min) + min
+            }
+        }
+
+        // const ball = new Ball(100, 100, 30).render(ctx)
+
+        class SuperBall extends Ball {
+            constructor(x, y, r) {
+                super(x, y, r) //需要 继承的参数，就继承当参数传进来
+                this.vy = SuperBall.rpFn([2, 4])
+                this.g = SuperBall.rpFn([0.2, 0.4])
+                this.a = 0 //反弹加速度
+                return this
+            }
+            move(ctx) {
+                // super() 把super当成一个函数调用，就报错
+                this.y += this.vy
+                this.vy += this.g
+
+                let current = this.vy * -0.75
+                // 触底
+                if ((this.y + this.r) >= ctx.canvas.height) {
+                    this.y = ctx.canvas.height - this.r
+
+                    // 当触底 速度很小的时候，不反弹
+                    if (Math.abs(current - this.a) < 0.01) return false
+
+                    this.a = this.vy *= -0.75
+                }
+                // 清除 小球 再绘制小球
+                // 清除整个画布
+                ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+                super.render(ctx) //super指向的父类的原型对象，可以把super当成一个对象调用
+                return true
+            }
+        }
+
+        // const ball = new SuperBall(100, 100, 30).render(ctx)
+
+        let ball, timer;
+
+        // 点击画布 生成一个 小球
+        canvas.onclick = e => {
+            let x = e.offsetX, y = e.offsetY;
+            let r = ~~Ball.rpFn([5, 55])
+            // 清除整个画布-每次只能生成一个小球
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+            ball = new SuperBall(x, y, r).render(ctx)
+
+            ballMove()
+        }
+
+        function ballMove() {
+            timer = window.requestAnimationFrame(ballMove)
+
+            if (!ball.move(ctx)) {
+                window.cancelAnimationFrame(timer)
+            }
+        }
+
+    </script>
+</body>
+
+</html>

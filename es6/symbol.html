@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Symbol</title>
+</head>
+
+<body>
+    <button>按钮</button>
+    <script>
+        /**
+        symbol 基本类型
+
+        属性私有化---数据保护
+        表示 独一无二的值
+        不能使用 new 调用，因为symbol 是一个原始类型的值，不是对象
+
+        参数：是symbol的描述
+
+        数据类型转换
+        String
+        toString
+        Boolean  true
+        不能转为 Number，不能使用任何运算符 运算 e.g.
+        */
+        // -----------------------------
+        /*
+        var s1 = Symbol()
+        var s2 = Symbol('ss')
+        function Person(name, gender) {
+            this.name = name
+            this.gender = gender
+        }
+        var p1 = new Person('毛桃', '男')
+        console.log(p1.gender)
+        */
+        // ----------------------------
+        /*
+        var Person = (function () {
+            var _gender=''
+            function Personinner(name, gender) {
+                this.name = name
+                _gender = gender
+            }
+            Personinner.prototype.getGender=function(){
+                return _gender
+            }
+            return Personinner
+        })()
+        var p1 = new Person('毛桃', '男')
+        console.log(p1)
+        console.log(p1.getGender())
+        */
+        // -------------------------
+        /*
+        var Person = (function () {
+            var _gender = Symbol('gender')
+            function Personinner(name, gender) {
+                this.name = name
+                this[_gender] = gender
+            }
+            Personinner.prototype.say = function () {
+                return this[_gender]
+            }
+            return Personinner
+        })()
+        var p1 = new Person('毛桃', '男')
+        console.log(p1)
+        console.log(p1.say())
+        console.log(p1[Symbol('gender')]) //undefined
+        */
+        /*
+        ES6  块作用域 - 一对 { } 包含的范围
+        */
+        let [a, b, c] = 'abc4'
+        // console.log(a, b, c)
+        let { left: L, top: T } = getComputedStyle(document.body)
+        // console.log(L, T, '\u0061', '😂 ❤️', 010)
+        /*
+            二级制  0b
+            八进制  0o（es6之前，0开头表示八进制）
+            十进制  非零开头
+            十六进制 0x 
+        */
+        /*
+          for of  必须是可迭代的
+           [iterator]
+        */
+        var arr = [1, 2, 3, 5, 9]
+        for (let item of arr) {
+            // console.log(item)
+        }
+        const obj = {
+            'a': 11,
+            'ab': 11,
+            'aa': 11,
+        }
+        //  迭代协议
+        obj[Symbol.iterator] = function () {
+            let length = Object.keys(obj).length
+            if (--length === 0) {
+                return {
+                    next: function () {
+                        return {
+                            value: '',
+                            done: false
+                        }
+                    }
+                }
+            } else {
+                return {
+                    next: function () {
+                        return {
+                            value: '',
+                            done: true
+                        }
+                    }
+                }
+            }
+
+        }
+        for (let { k, v } of obj) {
+            console.log(k, v)
+        }
+        console.log(obj)
+    </script>
+</body>
+
+</html>

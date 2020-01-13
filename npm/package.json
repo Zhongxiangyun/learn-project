@@ -1,0 +1,17 @@
+{
+  "name": "pro-presbyetr",
+  "version": "1.0.0",
+  "description": "测试npm包",
+  "main": "1.js",
+  "scripts": {
+    "test": "echo 测试"
+  },
+  "author": "PresByter",
+  "license": "ISC",
+  "dependencies": {
+    "jquery": "^3.4.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.41.2"
+  }
+}

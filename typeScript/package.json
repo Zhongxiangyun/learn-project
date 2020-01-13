@@ -1,0 +1,22 @@
+{
+  "name": "typeScript-demo",
+  "version": "1.0.0",
+  "description": "[https://www.tslang.cn/](https://www.tslang.cn/)",
+  "main": "index.js",
+  "dependencies": {
+    "@types/koa": "^2.11.0",
+    "koa": "^2.11.0",
+    "koa-controller": "^1.1.0",
+    "koa-controllers": "^0.1.6",
+    "typescript": "^3.7.4"
+  },
+  "devDependencies": {
+    "ts-node": "^8.5.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,1 @@
+module.exports.index = '我是index.js'
