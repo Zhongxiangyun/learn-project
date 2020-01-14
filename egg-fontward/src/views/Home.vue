@@ -24,6 +24,7 @@
 // @ is an alias to /src
 // import HelloWorld from "@/components/HelloWorld.vue";
 import Vue from "vue";
+const moment = require("moment");
 
 import { Button, Tabbar, TabbarItem, List, Cell, Toast } from "vant";
 Vue.use(Toast);
@@ -44,6 +45,12 @@ export default {
       loading: false,
       finished: false
     };
+  },
+  created() {
+    // eslint-disable-next-line no-console
+    console.log(moment("2019-12-31").format("YYYY-MM-DD"));
+    // eslint-disable-next-line no-console
+    console.log(moment("2019-12-31").format("yyyy-MM-DD"));
   },
   methods: {
     onLoad() {
