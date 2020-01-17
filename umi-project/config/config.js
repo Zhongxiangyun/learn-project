@@ -67,6 +67,9 @@ if (isAntDesignProPreview) {
 
 export default {
   plugins,
+  block: {
+    defaultGitUrl: 'https://github.com/ant-design/pro-blocks',
+  },
   hash: true,
   targets: {
     ie: 11,
@@ -81,6 +84,12 @@ export default {
           name: 'login',
           path: '/user/login',
           component: './user/login',
+        },
+        {
+          name: 'register',
+          icon: 'smile',
+          path: '/user/register',
+          component: './user/register',
         },
       ],
     },
