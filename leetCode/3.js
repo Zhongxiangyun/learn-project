@@ -22,6 +22,22 @@ const isMix = (arr1, arr2) => {
   return mixs;
 }; 
 
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var intersection = function(nums1, nums2) {
+  // has() 方法返回一个布尔值来指示对应的值value是否存在Set对象中
+  return [...new Set([...new Set(nums1)].filter(x => new Set(nums2).has(x)))];
+};
+console.log(intersection(arr1, arr2));
+
+// 作者：Alexer-660
+// 链接：https://leetcode-cn.com/problems/intersection-of-two-arrays/solution/349-liang-ge-shu-zu-de-jiao-ji-by-alexer-660/
+// 来源：力扣（LeetCode）
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
 // res = [...res, n];
 // var intersect = function (nums1, nums2) {
 //   let res = [];
