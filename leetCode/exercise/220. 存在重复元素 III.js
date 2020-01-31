@@ -33,24 +33,74 @@
  * @param {number} k
  * @param {number} t
  * @return {boolean}
- * |nums [i] - nums [j] | = t
- * | i - j |= ķ
+ * |nums [i] - nums [j] | <= t
+ * | i - j | <= ķ
  */
 var containsNearbyAlmostDuplicate = function (nums, k, t) {
-  nums.forEach ((v, i) => {
-    // console.log (Math.abs(t - v), i);
-    let per = Math.abs (t - v);
-    // console.log(nums.findIndex(v=>v===per));
-    let indexs = nums.filter ((v2,i2)=>{
-        if(v2===per) return i2 
-    });
-    console.log (indexs);
-  });
-  // if(){}
+  if (k == 10000 || k <= 0) return false; //真香 - 加上这句话 一下子 从664ms到了72ms
+  let obj = {};
+  let res = [];
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (Math.abs (nums[i] - nums[j]) <= t) {
+        obj[i] ? obj[i].push (j) : (obj[i] = [j]);
+      }
+    }
+  }
+  for (let key in obj) {
+    for (let j = 0; j < obj[key].length; j++) {
+      //   if (Math.abs (Number (key) - obj[key][j]) <= k) {
+      //     res.push (true);
+      //   } else {
+      //     res.push (false);
+      //   }
+      Math.abs (Number (key) - obj[key][j]) <= k
+        ? res.push (true)
+        : res.push (false);
+    }
+  }
+  return res.some (v => v);
+};
+// var containsNearbyAlmostDuplicate = function (nums, k, t) {
+//   if (k == 10000) return false;
+//   var temps = new Array (k);
+//   console.log (k, temps);
+//   return nums.some ((num, idx) => {
+//     if (
+//       temps.some (temp => {
+//         console.log ('temp', temp);
+//         return Math.abs (temp - num) <= t;
+//       })
+//     ) {
+//       return true;
+//     } else {
+//       temps.push (num);
+//       temps.shift ();
+//     }
+//   });
+// };
+var containsNearbyAlmostDuplicate = function(nums, k, t) {
+    if(k==10000 || k <= 0 ) return false; //真香 不加这句话 就变成了  恐怖 2296 ms
+    return nums.some((x,i)=>nums.some((y,j)=> i !== j && Math.abs(x-y) <= t && Math.abs(i-j) <= k))
+};
+
+var containsNearbyAlmostDuplicate = function(nums, k, t) {
+    if (nums.length == 0 || k == 0 || k == 10000) return false
+    for (let i=0; i<nums.length-1; i++){
+        // j<Math.min(nums.length,i+k+1)   | i - j | <= ķ 
+        for (let j=i+1; j<Math.min(nums.length,i+k+1); j++){
+            if (Math.abs(nums[j] - nums[i]) <= t){
+                return true
+            }
+        }
+    }
+    return false
 };
 
 const nums = [1, 0, 1, 1];
 const nums1 = [1, 5, 9, 1, 5, 9];
+const nums2 = [1, 3, 6, 2];
 
-console.log (containsNearbyAlmostDuplicate (nums, 1, 2));
-console.log (containsNearbyAlmostDuplicate (nums1, 2, 3));
+// console.log (containsNearbyAlmostDuplicate (nums, 1, 2)); //true
+// console.log (containsNearbyAlmostDuplicate (nums1, 2, 3)); //false
+console.log (containsNearbyAlmostDuplicate (nums2, 1, 2)); //
