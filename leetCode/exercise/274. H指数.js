@@ -32,3 +32,6 @@ h 指数的定义: “h 代表“高引用次数”（high citations），一名
 var hIndex = function(citations) {
     
 };
+
+const citations = [3,0,6,1,5]
+

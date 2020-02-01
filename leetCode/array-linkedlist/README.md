@@ -23,5 +23,15 @@
 前驱 后继
 ![双链表](https://i.loli.net/2020/01/30/sylW79L4IX3JCTS.png)
 
+## 练习
+### 206. 反转链表
+- [reverse-linked-list](https://leetcode-cn.com/problems/reverse-linked-list/)
 
+### 24. 两两交换链表中的节点
+- [swap-nodes-in-pairs](https://leetcode-cn.com/problems/swap-nodes-in-pairs/)
 
+### 141. 环形链表
+- [linked-list-cycle](https://leetcode-cn.com/problems/linked-list-cycle/)
+1. 看最后 是不是为 null
+2. 走一个 存一个set，判断是不是 重复
+3. 龟兔赛跑：设置一个快指针和一个慢指针；快 每次走2步；慢每次 走1步；如果是循环，最后会 快与慢相等。
