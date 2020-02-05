@@ -25,13 +25,34 @@ h 指数的定义: “h 代表“高引用次数”（high citations），一名
 说明: 如果 h 有多种可能的值，h 指数是其中最大的那个。
 
  */
+// TODO:没搞明白
 /**
  * @param {number[]} citations
  * @return {number}
+ * @1 先给数组排序，然后从后向前遍历列表中的元素，当第h个元素不满足引用数大于等于h+1时退出，说明h再增加时不能满足条件。
+ * 
+ * @2 从小到大排序后，单次扫描（当前位置为i，未被扫描的个数为n - i，即h，从n开始递减），若当前扫描的元素大于n-i，则表示有n-i个数符合条件，就是答案
  */
-var hIndex = function(citations) {
-    
+var hIndex = function (citations) {
+  let data = [];
+
+  if (citations.length === 0) return 0;
+  let res = citations.sort ().reverse ();
+  const len = citations.length;
+  //   console.log (res);
+
+  for (let i = 0; i < len; i++) {
+    if (res[i] > i) {
+    //   data.push (i + 1);
+      return i + 1;
+    }
+    // console.log (data);
+  }
+  return 0; // 当 [0,0,0]
 };
 
-const citations = [3,0,6,1,5]
+const citations = [3, 0, 6, 1, 5];
 
+console.log (hIndex (citations));
+console.log (hIndex ([6, 6, 4, 8, 4, 3, 3, 10]));
+console.log (hIndex ([0, 0, 1]));

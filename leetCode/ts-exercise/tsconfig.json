@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        // "outFile": "./bundle.js",
+        "module": "ES2015",
+        "target":"ES5",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "sourceMap": false,
+        "lib":["ESNext","DOM"],
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true   //开启装饰器
+        // "strictNullChecks": true
+    },
+    "compileOnSave": true, //自动编译
+    "include":[
+        "*"
+        // "./src/**/*"
+        // "app1/**/*"
+    ],
+    "exclude":[]
+}

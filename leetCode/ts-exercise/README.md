@@ -1,8 +1,21 @@
+# ts 做LeetCode
+
+# 配置等问题
+## 安装环境
+```bash
+npm init -y
+npm i typescript
+npm i ts-node
+```
+
+```bash
+tsc .\2.ts --outDir ./dist  #生成的js 放到 dist 目录下
+.\node_modules\.bin\ts-node .\2.ts #直接生成js并运行 
+```
+这里 设置了一个`tsconfig.json`文件;直接运行 `tsc`,自动生成js 放到 dist 目录下
 # TS
 [https://www.tslang.cn/](https://www.tslang.cn/)
 [https://www.npmjs.com/package/ts-node](https://www.npmjs.com/package/ts-node)
-
-
 ### bug 收集
 - 使用promise 提示错误
 	1. tsconfig.json->lib->esnext dom   
