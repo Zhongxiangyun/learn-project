@@ -8,8 +8,8 @@
 * @file  : s-react.js
 */
 function createElement (type, props, ...children) {
-    console.log(type);
-    console.log(props);
+    console.log(type);//div
+    console.log(props);//id
     console.log(children);
     
 }
