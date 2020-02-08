@@ -15,10 +15,23 @@
  *   padLeft('abc', 8, '0');     // '00000abc'
  *   padLeft('abc', 1);          // 'abc'
  */
-function padLeft (str, len, chars) {
+function padLeft (str = '', len = 0, chars = ' ') {
   /* 代码实现 */
+  if (str.length >= len) return str;
+  const leftlen = len - str.length;
+  const charslen = chars.length;
+  return (
+    chars.repeat (Math.floor (leftlen / charslen)) +
+    chars.substring (0, leftlen % charslen) +
+    str
+  );
 }
-
+// console.log (padLeft ('abc', 10));
+// console.log (padLeft ('abc', 10, 'foo'));
+// console.log (padLeft ('abc', 6, '123465'));
+// console.log (padLeft ('abc', 6, '_-'));
+// console.log (padLeft ('abc', 8, '0'));
+// console.log (padLeft ('abc', 1));
 /**
    * 编码题二：类似通配符的匹配
    * 说明：实现支持 '.' 和 '*' 的类似通配符的匹配，规则如下：
@@ -74,4 +87,11 @@ function isCyclic (o) {
    */
 function cutAndJoinArray (arr, index) {
   /* 代码实现 */
+  const M = arr.length;
+  const N = index;
+  if (M <= 2 || N <= 0 || N >= M) return false;
+  return [...arr.slice (N, M), ...arr.slice (0, N)];
 }
+// console.log (cutAndJoinArray ([1, 2, 3, 4], 1));
+// console.log (cutAndJoinArray ([1, 2, 3, 4, 5], 3));
+// console.log (cutAndJoinArray ([1, 2, 3, 4, 5, 6], 2));
