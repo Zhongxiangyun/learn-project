@@ -64,9 +64,6 @@ const findLongestWord = function (s: string = '', d: string[] = []): string {
     arrstrlength = arrstr.map((v, i: number) => {
         return typeof v === 'boolean' ? -1 : s.length - v.length
     })
-    // console.log(Math.max(...arrstrlength));
-
-    // indexOf
     let index: number = arrstrlength.indexOf(Math.max(...arrstrlength));
     let indexArr: string[] = []
     arrstrlength.forEach((v: number, i: number) => {
