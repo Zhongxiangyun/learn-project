@@ -19,3 +19,12 @@
 3. BFS
 ### 22. 括号生成
 - [22. 括号生成](https://leetcode-cn.com/problems/generate-parentheses/)
+1. 数学归纳法
+  n             num
+  1   ()         1
+  2   ()()、(()) 2 
+  3              5 
+2. 递归
+    长度 2n
+3. 递归 -》改进  不合法 -> 不递归
+                （ 的个数 是 n 个    

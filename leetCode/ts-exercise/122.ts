@@ -51,10 +51,7 @@ const maxProfit = (prices: number[] = []): number => {
             profits.push(prices[i + 1] - prices[i])
         }
         if (i === len - 1) break
-        // console.log(prices[i], prices[i + 1]);
     }
-    // console.log(profits);
-
     return eval(profits.join('+')) || 0
 };
 
