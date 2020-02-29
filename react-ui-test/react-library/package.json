@@ -1,0 +1,27 @@
+{
+  "name": "s-react-library",
+  "version": "1.0.1",
+  "description": "测试react 组件",
+  "main": "lib/bundle.js",
+  "scripts": {
+    "build": "rollup --config rollup.config.js",
+    "start": "rollup --config -w rollup.config.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react",
+    "react libiary",
+    "react UI"
+  ],
+  "author": "PresByter",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "@babel/preset-react": "^7.8.3",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "rollup": "^1.32.0",
+    "rollup-plugin-babel": "^4.3.3"
+  }
+}

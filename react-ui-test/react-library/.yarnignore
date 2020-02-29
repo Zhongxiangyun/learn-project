@@ -1,0 +1,3 @@
+# 忽略 以下文件
+src
+.gitignore
