@@ -6,6 +6,7 @@ npm i -D rollup-plugin-babel rollup @babel/core @babel/cli @babel/preset-env @ba
 yarn link
 
 yarn link "react-library"
+yarn unlink "react-library"
 yarn info "react-library"   #检查该npm包 是否 发布
 ```
 `@emotion/core` css

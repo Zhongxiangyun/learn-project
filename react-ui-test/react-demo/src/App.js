@@ -1,7 +1,8 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Switch } from "react-library";
+import { Switch } from "s-react-library";
+// import { Switch } from "react-library";
 function App() {
   return (
     <div className="App">
