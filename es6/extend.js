@@ -69,3 +69,7 @@ const fn3 = (a, b) => ({a, b});
 /**
  * 箭头函数 不能使用call apply bind 改变this的指向
  */
+function camelCase(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).replace(/-(\w)/g, (m, n) => n.toUpperCase());
+}
+console.log(camelCase('namepassword'));
