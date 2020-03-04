@@ -11,13 +11,15 @@ import HomeLayout from '../components/HomeLayout'
 const BasicRoute = () => (
     <BrowserRouter>
         <Switch>
-            <Route exact path="/" component={HomeLayout}>
+            {/* <Route exact path="/" component={HomeLayout}>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/detail" component={Detail} />
-                {/* <HomeLayout> */}
-                {/* </HomeLayout> */}
-            </Route>
+            </Route> */}
             <Route exact path="/login" component={Login} />
+            <HomeLayout>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/detail" component={Detail} />
+            </HomeLayout>
             <Route path="*" component={NoMatch} />
         </Switch>
     </BrowserRouter>
