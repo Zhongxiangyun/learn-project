@@ -1,24 +1,18 @@
 import React from 'react';
-import logo from './logo.svg';
+import { HashRouter, Switch, Route } from 'react-router-dom'
+// import logo from './logo.svg';
 import './App.css';
-
-function App() {
+import Home from './home';
+import Detail from './detail';
+const App: React.FC<{}> = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <HashRouter >
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/detail" component={Detail} />
+        </Switch>
+      </HashRouter>
     </div>
   );
 }

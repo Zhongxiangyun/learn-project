@@ -42,3 +42,27 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+## 安装
+
+```bash
+npx create-react-app my-app --template typescript
+# or
+yarn create react-app my-app --template typescript
+
+yarn
+# or
+npm i
+# 添加路由
+npm install --save react-router-dom
+```
+
+
+## 报错
+1. yarn or npm
+```
+Attempted import error: 'Route' is not exported from 'react-router-dom'.
+
+```
+- [Attempted import error: 'Route' is not exported from 'react-router-dom'](https://stackoverflow.com/questions/55331898/how-to-fix-error-attempted-import-error-route-is-not-exported-from-react-ro)
+ `npm` 或者`yarn`只能使用一种方式。
