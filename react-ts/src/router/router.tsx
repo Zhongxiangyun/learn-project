@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Home from '../home';
 import Detail from '../detail';
 import Login from '../pages/login/index'
-import NoMatch from '../pages/404/index'
+import NoMatch from '../pages/nomatch/index'
 import HomeLayout from '../components/HomeLayout'
 // HashRouter 哈希路由
 
