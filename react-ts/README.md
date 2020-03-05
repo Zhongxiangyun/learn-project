@@ -55,6 +55,9 @@ yarn
 npm i
 # 添加路由
 npm install --save react-router-dom
+# 暴露路由
+yarn run eject
+
 ```
 
 ## 页面布局
