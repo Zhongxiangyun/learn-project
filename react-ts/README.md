@@ -57,6 +57,11 @@ npm i
 npm install --save react-router-dom
 ```
 
+## 页面布局
+- [react-router-dom](https://reacttraining.com/react-router/core/guides/quick-start)
+做成后台公共组件的形式，需要把 登录页面 和 错误页面暴露出去；这时候遇到问题，两种解决方案。
+1. 将404、500等报错页面放到公共组件下面。
+2. 每个路由包一层layout，单独放 login 和 404、500等报错页面。
 
 ## 报错
 1. yarn or npm

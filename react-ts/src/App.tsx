@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Switch, Route } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 // import logo from './logo.svg';
 import './App.css';
 import Home from './pages/home/index';
@@ -12,13 +12,12 @@ const App: React.FC<{}> = () => {
     <div className="App">
       <HomeLayout></HomeLayout>
       {/* <HashRouter > */}
-        {/* <Switch> */}
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/detail" component={Detail} />
-          {/* <Route component={NoMatch} /> */}
-
-        {/* </Switch> */}
+          <Route path="*" component={NoMatch} />
+        </Switch>
       {/* </HashRouter> */}
     </div>
   );
