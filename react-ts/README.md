@@ -58,13 +58,90 @@ npm install --save react-router-dom
 # 暴露路由
 yarn run eject
 
+# 支持less
+npm install less-loader less --save
 ```
+## 支持less
+`yarn run eject`之后，安装less模块`npm install less-loader less --save`
+在根目录下`config\webpack.config.js`内找到加入如下代码
+![image.png](https://i.loli.net/2020/03/05/CayIKAHfeWrXLtN.png)
+```js
+// style files regexes
+const cssRegex = /\.css$/;
+const cssModuleRegex = /\.module\.css$/;
+const sassRegex = /\.(scss|sass)$/;
+const sassModuleRegex = /\.module\.(scss|sass)$/;
 
++ const lessRegex = /\.less$/;
++ const lessModuleRegex = /\.module\.less$/;
+```
+在 大约350行左右，找到`oneOf`的数组，在sass模块下，加入如下 less规则。并将`importLoaders: 3`中的3改为2
+
+```js
+ {
+              test: lessRegex,
+              exclude: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  // importLoaders: 3,
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                },
+                'less-loader'
+              ),
+              sideEffects: true,
+            },
+            {
+              test: lessModuleRegex,
+              use: getStyleLoaders(
+                {
+                  // importLoaders: 3,
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: {
+                    getLocalIdent: getCSSModuleLocalIdent,
+                  },
+                },
+                'less-loader'
+              ),
+            },
+```
+![less](https://i.loli.net/2020/03/05/RSLznh92xbQGsqk.png)
+
+## 安装 antd
+- [antd design](https://ant.design/docs/react/introduce-cn)
+```bash
+# 安装antd
+npm install antd --save
+# 安装 按需加载 
+npm install babel-plugin-import --save-dev
+```
+在`package.json`添加配置
+```json
+  "babel": {
+    "presets": [
+      "react-app"
+    ],
++    "plugins": [
++      ["import", {
++        "libraryName": "antd",
++        "libraryDirectory": "es",
++        "style": "css" 
++      }]
++    ]
+  }
+}
+```
+#### 按需加载
+```bash
+npm install babel-plugin-import --save-dev
+```
 ## 页面布局
 - [react-router-dom](https://reacttraining.com/react-router/core/guides/quick-start)
 做成后台公共组件的形式，需要把 登录页面 和 错误页面暴露出去；这时候遇到问题，两种解决方案。
 1. 将404、500等报错页面放到公共组件下面。
 2. 每个路由包一层layout，单独放 login 和 404、500等报错页面。
+## 安装 mobx
 
 ## 报错
 1. yarn or npm
