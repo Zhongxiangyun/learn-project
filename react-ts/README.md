@@ -142,7 +142,29 @@ npm install babel-plugin-import --save-dev
 1. 将404、500等报错页面放到公共组件下面。
 2. 每个路由包一层layout，单独放 login 和 404、500等报错页面。
 ## 安装 mobx
+-----------
+使用Mobx作为app状态管理方案
+#### 记得安装 `MobX Developer Tools`
+mobx 开发 谷歌插件
+- [https://cn.mobx.js.org/](https://cn.mobx.js.org/)
+```bash
+npm install --save mobx mobx-react
+# 安装 装饰器 将 class或者object 转成 ES5
+npm install --save-dev @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
 
+npm install babel-plugin-transform-class-properties -D
+
+npm install --save-dev babel-plugin-transform-decorators-legacy
+
+```
+并在tsconfig.json中加入一行配置来使ts支持装饰器语法：
+```json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true
+  }
+}
+```
 ## 报错
 1. yarn or npm
 ```
