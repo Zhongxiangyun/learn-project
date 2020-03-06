@@ -1,5 +1,5 @@
 import HomeStore from './home'
 
 export default {
-    HomeStore: new HomeStore()
+    homeStore: new HomeStore()
 }

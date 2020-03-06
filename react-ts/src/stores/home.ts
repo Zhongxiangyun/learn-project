@@ -1,15 +1,17 @@
 // home.ts
-import {action, observable} from 'mobx'
+import { action, observable } from 'mobx'
 
 export default class HomeStore {
 
   @observable name: string = 'Clint'
-  
-  constructor (initialState: any = {}) {
+
+  constructor(initialState: any = { name: 'store' }) {
     this.name = initialState.name;
   }
 
-  @action setName(name: string) {
+  @action
+  public setName = (name: string) => {
+    // console.log(name, this);
     this.name = name
   }
 }
