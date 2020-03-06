@@ -165,6 +165,175 @@ npm install --save-dev babel-plugin-transform-decorators-legacy
   }
 }
 ```
+#### Mobx 用法示例
+1. 在`src`下建立`stores`文件夹。并依次建立`detail.ts`，`index.ts`。
+> 
+reatc-example
+├── src
+│   ├── stores
+│   │   │── detail.ts
+│   │   └── index.ts
+│   └── index.tsx
+├── config
+│   └── webpack.config.js
+└── package.json
+>
+2. `detail.ts`文件
+```js
+//detail.ts
+import { action, observable } from 'mobx'
+
+interface Cat {
+    name: string;
+    age?: number | string;
+    color?: string;
+}
+export default class DetailStore {
+
+    @observable name: string = 'Clint'
+    @observable arr: Cat[] = []
+
+    constructor(initialState: any = { name: 'detail-store', arr: [{ name: 'Tom', color: 'red' },{ name: 'Jerry',age:'3', color: 'blue' }] }) {
+        this.name = initialState.name;
+        this.arr = initialState.arr;
+    }
+
+    @action
+    public setName = (name: string) => {
+        this.name = name
+    }
+    public changeArray = (item: Cat) => {
+        this.arr.push(item)
+    }
+}
+```
+3. `index.ts`文件,store的初始化
+```js
+//index.ts
+import HomeStore from './home'
+import DetailStore from './detail'
+
+export default {
+    homeStore: new HomeStore(),
+    detailStore: new DetailStore(),
+}
+```
+4. 配置Provider 在`src/index.tsx` 下
+```js
+// src/index.tsx
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'mobx-react'
+
+import Router from './router/router';
+// import './index.css';
+import stores from './stores/index';
+// import * as serviceWorker from './serviceWorker';
+
+ReactDOM.render(
+    <Provider {...stores}>
+        <Router />
+    </Provider>,
+    document.getElementById('root'));
+```
+5. 使用store
+**注意**这里 在react 中，会用到装饰器，而装饰器写法只能在 class 类组件中使用。而 函数式组件 只能 使用嵌套的方式。
+一、 第一种 class 组件中。
+```js
+// home.tsx
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import { Button } from 'antd';
+import { observer, inject } from 'mobx-react'
+import homeStore from '../../stores/home'
+import './home.less';
+type IProps = {
+    homeStore: homeStore
+    errors?: string
+}
+@inject('homeStore')
+@observer
+class Home extends Component<IProps> {
+    private clickHandler = (): void => {
+        // const { homeStore } = this.props;
+        // homeStore.setName("Bob");
+        const {setName}=this.props.homeStore
+        setName("Bob666")
+    }
+
+    render() {
+        return (
+            <div className="home">
+                <h1 className='home-item'>Home</h1>
+                <h2>{this.props.homeStore.name}</h2>
+                <Link to='/detail'>详情</Link>
+                <Link to='/login'>登录</Link>
+                <Button onClick={this.clickHandler} type="primary">改名字</Button>
+            </div>
+        )
+    }
+};
+export default Home;
+```
+【注意】如果 在store 里面,声明的 action 函数，不是用的 => 函数，可能出现`this`指向问题。如下面的例子：
+```js
+/**
+ * 第一种
+*/
+// store 中
+  @action
+  public setName(name: string) {
+    // 没有使用 箭头函数
+    this.name = name
+  }
+  // 使用
+  private clickHandler = (): void => {
+        const {setName}=this.props.homeStore
+        setName("Bob666")
+        // 这时候 this 指向 undefined
+        // 所以 报错，可以改写成下面方式，即可解决
+        // const { homeStore } = this.props;
+        // homeStore.setName("Bob");
+  }
+/**
+ * 第二种
+*/
+  @action
+  public setName = (name: string) => {
+    // 箭头函数
+    this.name = name
+  }
+  //使用
+    private clickHandler = (): void => {
+        const {setName}=this.props.homeStore
+        setName("Bob666")
+        // 这时候 this 指向 store
+        // 成功
+  }
+```
+二、 第二种 函数 组件中
+```js
+import React from 'react';
+import { Link } from "react-router-dom";
+import { observer, inject } from 'mobx-react'
+type IProps = {
+    [key: string]: any
+}
+const Detail: React.FC<{}> = inject('detailStore')(observer((props: IProps) => (
+    <div className="App">
+        <h3>Detail</h3>
+        <h6>{props.detailStore.name}</h6>
+        <ul>
+            {props.detailStore.arr.map((v: any) => <li key={v.name}>{v.name}</li>)}
+        </ul>
+        <Link to='/home'>首页</Link>
+        <Link to='/lll'>空页面</Link>
+    </div>
+)));
+
+export default Detail;
+```
 ## 报错
 1. yarn or npm
 ```
