@@ -22,7 +22,6 @@ const BasicRoute = () => (
                 <Route exact path="/detail" component={Detail} />
             </Route> */}
             {/* <HomeLayout>
-                <Route exact path="/" component={Home} />
                 <Route exact path="/detail" component={Detail} />
             </HomeLayout> */}
             {/* <Route render={ () => <App /> } /> */}
