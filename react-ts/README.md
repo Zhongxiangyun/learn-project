@@ -372,7 +372,9 @@ process.env.GENERATE_SOURCEMAP = 'false';
 1. yarn or npm
 ```
 Attempted import error: 'Route' is not exported from 'react-router-dom'.
-
 ```
 - [Attempted import error: 'Route' is not exported from 'react-router-dom'](https://stackoverflow.com/questions/55331898/how-to-fix-error-attempted-import-error-route-is-not-exported-from-react-ro)
  `npm` 或者`yarn`只能使用一种方式。
+ 
+2. 在`pages/login/components/LoginForm.tsx`中引入store会报错。
+- [inject error](https://github.com/mobxjs/mobx-react#strongly-typing-inject)

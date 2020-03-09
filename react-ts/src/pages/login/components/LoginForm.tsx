@@ -15,17 +15,18 @@ interface IProps {
     errors?: string
     [key: string]: any
 }
+const initialState = {
+    username: process.env.NODE_ENV === 'development' ? 'admin000' : '',
+    password: process.env.NODE_ENV === 'development' ? 'admin123456' : ''
+};
+type State = Readonly<typeof initialState>;
+
 @observer
 @inject('userStore')
-// @inject((stores) => {
-//     return {
-//     //   storeA: stores.storeA,
-//     //   storeB: stores.storeB,
-//     //   storeC: stores.storeC,
-//     handleLogin: stores.userStore.handleLogin
-//   }})
 class LoginForm extends Component<IProps, {}> {
     static defaultProps = { userStore: {} }
+    readonly state: State = initialState;
+
     private onFinish = (values: any) => {
         console.log('Received values of form: ', values);
         const { userStore } = this.props
@@ -35,25 +36,27 @@ class LoginForm extends Component<IProps, {}> {
     };
 
     render() {
-        console.log(this.props.userStore)
+        console.log(process.env.NODE_ENV, this.props.userStore)
+        const { username, password } = this.state
         return (
             <Form
                 name="normal_login"
                 className="login-form"
-                initialValues={{ remember: true }}
+                initialValues={{ remember: true, username, password }}
                 onFinish={this.onFinish}
             >
                 <Form.Item
                     name="username"
                     rules={[{ required: true, message: '请输入正确的登录名!' }]}
                 >
-                    <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入登录名" />
+                    <Input value={username} prefix={<UserOutlined className="site-form-item-icon" />} placeholder="请输入登录名" />
                 </Form.Item>
                 <Form.Item
                     name="password"
                     rules={[{ required: true, message: '请输入正确的密码!' }]}
                 >
                     <Input
+                        value={password}
                         prefix={<LockOutlined className="site-form-item-icon" />}
                         type="password"
                         placeholder="请输入密码"
