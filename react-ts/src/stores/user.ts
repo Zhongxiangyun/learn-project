@@ -1,27 +1,31 @@
 import { action, observable } from 'mobx'
-
-interface IArray {
+// import { logIn } from '../api/user'
+export interface IArray {
     [key: string]: any
 }
-interface Cat {
+export interface Cat {
     name: string;
     age?: number | string;
     color?: string;
+}
+export interface UserInfo {
+    username: string;
+    password: string;
 }
 export default class UserStore {
 
     @observable name: string = 'Clint'
     @observable arr: Cat[] = []
 
-    constructor(initialState: any = { name: 'detail-store', arr: [{ name: 'Tom', color: 'red' },{ name: 'Jerry',age:'3', color: 'blue' }] }) {
+    constructor(initialState: any = { name: 'detail-store', arr: [{ name: 'Tom', color: 'red' }, { name: 'Jerry', age: '3', color: 'blue' }] }) {
         this.name = initialState.name;
         this.arr = initialState.arr;
     }
 
     @action
-    public setName = (name: string) => {
-        // console.log(name, this);
-        this.name = name
+    public handleLogin = (userInfo: UserInfo) => {
+        console.log(userInfo);
+        // this.name = name
     }
     public changeArray = (item: Cat) => {
         // console.log(name, this);

@@ -1,7 +1,7 @@
 import request from '../utils/request-fetch';
 // 登录验证码
 // 用户登录
-export const logIn = ({ pageNumber = 1, pageSize = 10, username = '', password = '' } = {}) => {
+export const logIn = ({username = '', password = '' } = {}) => {
     return request({
         url: '/employee_login',
         data: {

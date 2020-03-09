@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
+import { observer, inject } from 'mobx-react'
 import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../login.less'
-
-
-class LoginForm extends Component {
+import userStore from '../../../stores/user'
+interface IProps {
+    userStore: userStore
+    errors?: string
+    [key: string]: any
+}
+@inject('userStore')
+@observer
+class LoginForm extends Component<IProps> {
     private onFinish = (values: any) => {
         console.log('Received values of form: ', values);
+        const {handleLogin}=this.props.userStore
+        handleLogin(values)
     };
 
     render() {
-        
+        console.log(this.props)
         return (
             <Form
                 name="normal_login"
