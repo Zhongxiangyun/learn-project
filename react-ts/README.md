@@ -132,15 +132,18 @@ npm install babel-plugin-import --save-dev
   }
 }
 ```
+
 #### 按需加载
 ```bash
 npm install babel-plugin-import --save-dev
 ```
-## 页面布局
+
+## router 页面布局
 - [react-router-dom](https://reacttraining.com/react-router/core/guides/quick-start)
 做成后台公共组件的形式，需要把 登录页面 和 错误页面暴露出去；这时候遇到问题，两种解决方案。
 1. 将404、500等报错页面放到公共组件下面。
 2. 每个路由包一层layout，单独放 login 和 404、500等报错页面。
+
 ## 安装 mobx
 -----------
 使用Mobx作为app状态管理方案
@@ -167,7 +170,7 @@ npm install --save-dev babel-plugin-transform-decorators-legacy
 ```
 #### Mobx 用法示例
 1. 在`src`下建立`stores`文件夹。并依次建立`detail.ts`，`index.ts`。
-> 
+``` 
 reatc-example
 ├── src
 │   ├── stores
@@ -177,7 +180,7 @@ reatc-example
 ├── config
 │   └── webpack.config.js
 └── package.json
->
+```
 2. `detail.ts`文件
 ```js
 //detail.ts
@@ -334,6 +337,37 @@ const Detail: React.FC<{}> = inject('detailStore')(observer((props: IProps) => (
 
 export default Detail;
 ```
+
+## fetch && axios
+1. 安装 `js-cookie`
+```bash
+npm i js-cookie @types/js-cookie --save
+```
+2. 使用 fetch
+- [Fetch](https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API)
+在`utils/request-fetch.ts`文件夹下
+
+## 打包
+```bash
+npm run build
+```
+但是 会生成`.map文件`；上线的时候我们需要去掉这个文件。
+在`config/webpack.config.js`内 第33行
+```js
+// Source maps are resource heavy and can cause out of memory issue for large source files.
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
+```
+直接将改为
+```js
+const shouldUseSourceMap = 'false';
+```
+即可。
+第二种办法，由上面的信息可知，`.map`文件是由回家变量` process.env.GENERATE_SOURCEMAP`控制的。所以由于打包的时候执行的脚本文件是`scripts/build.js`，所在在`scripts/build.js`内添加如下代码即可。
+```js
+// 打包禁止生成 .map 文件
+process.env.GENERATE_SOURCEMAP = 'false';
+```
+
 ## 报错
 1. yarn or npm
 ```

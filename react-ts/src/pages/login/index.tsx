@@ -1,12 +1,21 @@
-import React from 'react';
-import { Link } from "react-router-dom";
-const Login: React.FC<{}> = () => (
-    <div>
-        Login
-    <Link to='/'>登录 /</Link>
-    <br/>
-    <Link to='/home'>登录 /home</Link>
-    </div>
-);
+import React, { Component } from 'react';
+// import { Link } from "react-router-dom";
+// import { Form, Input, Button, Checkbox, Row, Col } from 'antd';
+// import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import LoginLayout from './components/LoginLayout'
+import './login.less'
+class Login extends Component {
+    // private onFinish = (values: any) => {
+    //     console.log('Received values of form: ', values);
+    // };
+
+    render() {
+        return (
+            <div className='login'>
+                <LoginLayout></LoginLayout>
+            </div>
+        );
+    }
+}
 
 export default Login;
