@@ -5,22 +5,37 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import '../login.less'
 import userStore from '../../../stores/user'
+// interface userStore {
+//     handleLogin: ()=>void
+//     errors?: string
+//     [key: string]: any
+// }
 interface IProps {
-    userStore: userStore
+    userStore?: userStore
     errors?: string
     [key: string]: any
 }
-@inject('userStore')
 @observer
-class LoginForm extends Component<IProps> {
+@inject('userStore')
+// @inject((stores) => {
+//     return {
+//     //   storeA: stores.storeA,
+//     //   storeB: stores.storeB,
+//     //   storeC: stores.storeC,
+//     handleLogin: stores.userStore.handleLogin
+//   }})
+class LoginForm extends Component<IProps, {}> {
+    static defaultProps = { userStore: {} }
     private onFinish = (values: any) => {
         console.log('Received values of form: ', values);
-        const {handleLogin}=this.props.userStore
-        handleLogin(values)
+        const { userStore } = this.props
+        userStore && userStore.handleLogin(values)
+        // const { handleLogin } = this.props.userStore
+        // handleLogin(values)
     };
 
     render() {
-        console.log(this.props)
+        console.log(this.props.userStore)
         return (
             <Form
                 name="normal_login"

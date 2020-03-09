@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx'
-// import { logIn } from '../api/user'
+import { logIn } from '../api/user'
 export interface IArray {
     [key: string]: any
 }
@@ -23,12 +23,14 @@ export default class UserStore {
     }
 
     @action
-    public handleLogin = (userInfo: UserInfo) => {
-        console.log(userInfo);
-        // this.name = name
+    public handleLogin = async (userInfo: UserInfo) => {
+        let res = await logIn(userInfo)
+        console.log(res);
+        this.name = userInfo.username
+        // this.arr.push(userInfo)
     }
-    public changeArray = (item: Cat) => {
-        // console.log(name, this);
-        this.arr.push(item)
-    }
+    // public changeLogin = (item: Cat) => {
+    //     // console.log(name, this);
+    //     this.arr.push(item)
+    // }
 }
