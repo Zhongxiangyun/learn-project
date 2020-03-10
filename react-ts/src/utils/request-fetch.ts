@@ -1,4 +1,4 @@
-import { notification, message } from 'antd';
+import { message } from 'antd';
 import { createBrowserHistory } from 'history';
 import config from '../config/index';
 import { getCookies } from './cookies';

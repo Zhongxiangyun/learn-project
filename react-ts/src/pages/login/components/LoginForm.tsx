@@ -28,9 +28,13 @@ class LoginForm extends Component<IProps, {}> {
     readonly state: State = initialState;
 
     private onFinish = (values: any) => {
-        console.log('Received values of form: ', values);
+        // console.log('Received values of form: ', values);
         const { userStore } = this.props
         userStore && userStore.handleLogin(values)
+        setTimeout(()=>{
+            console.log(userStore && userStore.userInfo.state);
+        },0)
+        
         // const { handleLogin } = this.props.userStore
         // handleLogin(values)
     };
