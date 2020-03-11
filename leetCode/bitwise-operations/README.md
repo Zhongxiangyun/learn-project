@@ -33,6 +33,10 @@
 
 ### 231. 2的幂 
 - [power-of-two](https://leetcode-cn.com/problems/power-of-two/)
-
+1. /2 不停的进行运算 看看有没有 余数
+2. log2===init
+3. 位运算  X = X & (X-1) => 清零最低位的1 (2的幂 满足有一个1且仅有一个1，即：00000100000,000010,)
 ### 338. 比特位计数
 - [counting-bits](https://leetcode-cn.com/problems/counting-bits/)
+1. 写一个循环 调用191里面的方法，计算里面的值
+2. 循环 进行累加； arr[i] = arr[i & (i - 1)] + 1

@@ -34,7 +34,7 @@
  * @return {boolean}
  */
 // TODO:LeetCode上超时
-const isPowerOfTwo = (n: number): boolean => {
+const isPowerOfTwo1 = (n: number): boolean => {
     let count = 0
     let m = n
     if (n === 0) {
@@ -45,6 +45,27 @@ const isPowerOfTwo = (n: number): boolean => {
         count++
     }
     return Math.pow(2, (count - 1)) === n
+};
+
+const isPowerOfTwo2 = (n: number): boolean => {
+    return typeof Math.log2(n) === 'number' && Math.log2(n) % 1 === 0
+};
+const isPowerOfTwo = (n: number): boolean => {
+    // 位运算  X = X & (X-1) => 清零最低位的1 (2的幂 满足有一个1且仅有一个1，即：00000100000,000010,)
+    // 011 -> 3
+    // &
+    // 010 -> 3-1
+    // 010 -> 2  不为0 不是2的幂数
+    // -------------------
+    // 010 -> 2
+    // &
+    // 001 -> 2-1
+    // 000 -> 0  为0 是2的幂数
+    // -------------------
+    if (n <= 0) {
+        return false
+    }
+    return (n !== 0) && ((n & (n - 1)) === 0)
 };
 
 console.log(isPowerOfTwo(1));

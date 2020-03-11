@@ -32,15 +32,19 @@
  * @param {number} num
  * @return {number[]}
  */
-const countBits = (num: number): number[] => {
+const countBits1 = (num: number): number[] => {
     let arr: number[] = []
     for (let i = 0; i <= num; i++) {
-        // const binaryNum = i.toString(2)
-        const binaryNum = ((i.toString(2).match(/1/g)) ||[]).length
+        const binaryNum = ((i.toString(2).match(/1/g)) || []).length
         arr.push(binaryNum)
-        // console.log(binaryNum);
-        // console.log(countBitsHammingWeight(+binaryNum));
     }
     return arr
 };
-countBits(5)
+const countBits = (num: number): number[] => {
+    let arr: number[] = Array.from({length: num+1}, () => 0);
+    for (let i = 1; i <= num; i++) {
+        arr[i] = arr[i & (i - 1)] + 1
+    }
+    return arr
+};
+console.log(countBits(5));
