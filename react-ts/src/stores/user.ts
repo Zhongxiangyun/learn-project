@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx'
-import { logIn } from '../api/user'
+// import { logIn } from '../api/user'
 export interface IArray {
     [key: string]: any
 }
@@ -14,6 +14,12 @@ export interface UserInfo {
     employeeId?: string;
     webToken?: string;
     state?: number;
+}
+export interface resData {
+    state: number;
+    name_: string;
+    employee_id_: string;
+    web_token: string;
 }
 export default class UserStore {
 
@@ -30,10 +36,12 @@ export default class UserStore {
     }
 
     @action
-    public handleLogin = async (userInfo: UserInfo) => {
-        let res = await logIn(userInfo)
+    public handleLogin = async (res: resData) => {
+        console.log(res);
+        
+        // let res = await logIn(userInfo)
         if (res.state === 1) {
-            this.userInfo = { ...this.userInfo,state:res.state, username: res.name_, employeeId: res.employee_id_, webToken: res.web_token }
+            this.userInfo = { ...this.userInfo, state: res.state, username: res.name_, employeeId: res.employee_id_, webToken: res.web_token }
         }
         // console.log(this.userInfo);
         // this.arr.push(userInfo)
@@ -43,3 +51,4 @@ export default class UserStore {
     //     this.arr.push(item)
     // }
 }
+export type userStoreType = typeof UserStore;

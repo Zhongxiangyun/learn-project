@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
 import { observer, inject } from 'mobx-react'
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, message } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
+import { RouteProps, withRouter } from 'react-router-dom';
+
 import '../login.less'
-import userStore from '../../../stores/user'
-// interface userStore {
-//     handleLogin: ()=>void
-//     errors?: string
-//     [key: string]: any
-// }
+import { logIn } from '../../../api/user'
+import userStoreType from '../../../stores/user'
+
 interface IProps {
-    userStore?: userStore
-    errors?: string
+    // history?:any;
+    userStore?: userStoreType;
+    errors?: string;
     [key: string]: any
 }
 const initialState = {
@@ -21,26 +21,32 @@ const initialState = {
 };
 type State = Readonly<typeof initialState>;
 
+@(withRouter as any)
 @observer
 @inject('userStore')
-class LoginForm extends Component<IProps, {}> {
-    static defaultProps = { userStore: {} }
+class LoginForm extends Component<IProps & RouteProps, State> {
+
+    // static defaultProps = { userStore: {} }
     readonly state: State = initialState;
 
-    private onFinish = (values: any) => {
+    private onFinish = async (values: any) => {
+        const res = await logIn(values)
         // console.log('Received values of form: ', values);
-        const { userStore } = this.props
-        userStore && userStore.handleLogin(values)
-        setTimeout(()=>{
-            console.log(userStore && userStore.userInfo.state);
-        },0)
-        
+        const { userStore, history } = this.props
+        userStore && userStore.handleLogin(res)
+
+        if (res.state === 1) {
+            message.info('登录成功！');
+            setTimeout(() => {
+                history.push('/home')
+            }, 1000)
+        }
         // const { handleLogin } = this.props.userStore
         // handleLogin(values)
     };
 
     render() {
-        console.log(process.env.NODE_ENV, this.props.userStore)
+        // console.log(process.env.NODE_ENV, this.props)
         const { username, password } = this.state
         return (
             <Form
@@ -82,4 +88,5 @@ class LoginForm extends Component<IProps, {}> {
     }
 }
 
+// export default withRouter(LoginForm);
 export default LoginForm;
