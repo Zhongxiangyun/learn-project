@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 // import { Link } from "react-router-dom";
-import { Layout, Menu } from 'antd';
+import { Layout } from 'antd';
 import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-    UploadOutlined,
 } from '@ant-design/icons';
 import './layoutMain.less'
 import ISider from './component/ISider'
+import IHeader from './component/IHeader'
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Footer, Content } = Layout;
 interface IProps {
     // history?:any;
     // userStore?: userStoreType;
@@ -42,13 +40,14 @@ class HomeLayout extends Component<IProps, State> {
                             className: 'trigger',
                             onClick: this.toggle,
                         })}
+                        <IHeader></IHeader>
                     </Header>
                     <Content
-                        className="site-layout-background"
                         style={{
                             margin: '24px 16px',
                             padding: 24,
                             minHeight: 280,
+                            backgroundColor: '#fff'
                         }}
                     >
                         {children}
