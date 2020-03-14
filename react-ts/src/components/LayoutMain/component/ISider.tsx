@@ -2,8 +2,9 @@ import React from 'react';
 // import { Link } from "react-router-dom";
 import { observer, inject } from 'mobx-react'
 import { Layout, Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
-// import Icon from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined } from '@ant-design/icons';
+import routers from '../../../router/router';
+console.log((routers));
 
 const { SubMenu } = Menu;
 const { Sider } = Layout;
@@ -12,18 +13,59 @@ type IProps = {
     collapsed: boolean;
     [key: string]: any
 }
-
+export interface PathInfo {
+    path: string;
+    region: string[];
+}
+const MDiv = (arr: any[]) => {
+    return (arr.map((item: any) => {
+        // if (item.children.length > 0) { 
+        //     return ({MDiv(item.children)})
+        // }
+        return (<Menu.Item key={item.path}>{item.title}</Menu.Item>)
+    }))
+}
 const ISider: React.FC<IProps> = inject('detailStore')(observer((props: IProps) => {
-    console.log(props);
+    const paths:string|any = localStorage && localStorage.getItem('path')
+    // TODO:默认路由显示
+    console.log(JSON.parse(paths));
 
     const handleClick = (e: any) => {
         console.log('click ', e.keyPath);
+        const pathContent: PathInfo = {
+            path: e.keyPath[0],
+            region: e.keyPath.slice(1)
+        }
+        localStorage.setItem('path', JSON.stringify(pathContent))
     };
     return ((
         <Sider trigger={null} collapsible collapsed={props.collapsed}>
             <div className="logo" />
-            <Menu theme="dark" mode="inline" onClick={handleClick} defaultOpenKeys={['sub2','sub3']} defaultSelectedKeys={['8']}>
-                <SubMenu
+            <Menu theme="dark" mode="inline" onClick={handleClick} defaultOpenKeys={['sub2', 'sub3']} defaultSelectedKeys={['8']}>
+                {routers.length > 0 && routers.map(item => {
+                    if (!item.hideInMenu && item.children.length > 0) {
+                        return (
+                            <SubMenu
+                                key={item.path}
+                                title={
+                                    <span>
+                                        <MailOutlined />
+                                        <span>{item.title}</span>
+                                    </span>
+                                }
+                            >
+                                {MDiv(item.children)}
+                            </SubMenu>
+                        );
+                    } else if (!item.hideInMenu && item.children.length === 0) {
+                        return (<Menu.Item key={item.path}>
+                            <AppstoreOutlined />
+                            {item.title}</Menu.Item>)
+                    } else {
+                        return null;
+                    }
+                })}
+                {/* <SubMenu
                     key="sub1"
                     title={
                         <span>
@@ -69,8 +111,7 @@ const ISider: React.FC<IProps> = inject('detailStore')(observer((props: IProps) 
                     <Menu.Item key="9">Option 9</Menu.Item>
                     <Menu.Item key="10">Option 10</Menu.Item>
                     <Menu.Item key="11">Option 11</Menu.Item>
-                    <Menu.Item key="12">Option 12</Menu.Item>
-                </SubMenu>
+                </SubMenu> */}
             </Menu>
         </Sider>
     ))
