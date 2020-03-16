@@ -12,6 +12,10 @@
             box-sizing: content-box;
         }
 
+        .container {
+            background-color: aquamarine;
+        }
+
         .a1 {
             width: 100px;
             height: 100px;
@@ -28,13 +32,46 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+
+        .p {
+            /* height: 100px; */
+            /* height: 50vh; */
+            /* height: auto; */
+            background-color: royalblue;
+            /* 1. 使用display：flex */
+            /* display: flex; */
+
+            /* 2.设置父盒子高度 */
+            /* height: 100px; */
+
+            /* 3. 使用display: grid; */
+            /* display: grid; */
+            /* 4. 父盒子  overflow: hidden;子盒子 float: right; */
+            /* overflow: hidden; */
+        }
+        .p::after {
+				content: "";
+				display: block;
+				clear: both;
+			}
+        .c {
+            background-color: chartreuse;
+            height: 100px;
+            width: 100px;
+
+            /* float: right; */
+        }
     </style>
 </head>
 
 <body>
+    <!-- 盒子的高度 = content的高度 + padding-top(内上边距)+ padding-bottom(内下边距) + border-top(上边框边框) + border-bottom(下边框) -->
     <div class="container">
         <div class="a1">a1</div>
         <div class="a2">a2</div>
+    </div>
+    <div class="p">
+        <span class="c">child</span>
     </div>
 
 </body>

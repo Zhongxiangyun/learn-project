@@ -21,6 +21,8 @@ const animal1 = Object.create (Animal);
 delete animal1.name;
 console.log (animal1.__proto__);
 console.log (animal1.name);
+console.log ('name' in animal1); //in运算符会检查它或者其原型链是否包含具有指定名称的属性。
+console.log (animal1.hasOwnProperty ('name')); //hasOwnPropert()方法返回值是一个布尔值，指示对象自身属性中是否具有指定的属性，因此这个方法会忽略掉那些从原型链上继承到的属性。
 // 4.
 // (function() {
 //     console.log(1);

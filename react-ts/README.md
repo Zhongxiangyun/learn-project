@@ -149,12 +149,16 @@ npm install --save-dev  @types/react @types/react-dom @types/react-router-dom
 做成后台公共组件的形式，需要把 登录页面 和 错误页面暴露出去；这时候遇到问题，两种解决方案。
 1. 将404、500等报错页面放到公共组件下面。
 2. 每个路由包一层layout，单独放 login 和 404、500等报错页面。
+
 #### 使用withRouter 报错
 一个资深大神给的建议：说 mobx 和 react-router-dom 这两个包不兼容的时候，使用any；就可以了。如下：
 ```
 @(withRouter as any)
-
 ```
+
+#### antd 4.x 版本icon 变成按需引入
+antd 4.x 版本icon 变成按需引入，icon不能一次全部加载进去，下面 是解决方案。
+- [icon](https://www.npmjs.com/package/@ant-design/icons-react)
 
 ## 安装 mobx
 -----------
