@@ -14,12 +14,13 @@ function outer () {
 outer ();
 */
 
-// const Animal = {
-//   name: 'cat',
-// };
-// const animal1 = Object.create (Animal);
-// delete animal1.name;
-// console.log (animal1.name);
+const Animal = {
+  name: 'cat',
+};
+const animal1 = Object.create (Animal);
+delete animal1.name;
+console.log (animal1.__proto__);
+console.log (animal1.name);
 // 4.
 // (function() {
 //     console.log(1);
@@ -52,14 +53,14 @@ outer ();
 /**
  *  8. Given a string with such a special case `[number|string]`, where `number` indicates the number of repetitions and `string` indicates the string that needs to be repeated. 
  */
-const respeat = str => {
-  let number = str.slice (str.search (/\[/g) + 1, str.search (/\|/g));
-  let rstr = str.slice (str.search (/\|/g) + 1, str.search (/\]/g));
-  return `${str.slice (0, str.search (/\[/g))}${rstr.repeat (number)}${str.slice (str.search (/\]/g) + 1)}`;
-};
-console.log (respeat ('a[3|bc]de'));
+// const respeat = str => {
+//   let number = str.slice (str.search (/\[/g) + 1, str.search (/\|/g));
+//   let rstr = str.slice (str.search (/\|/g) + 1, str.search (/\]/g));
+//   return `${str.slice (0, str.search (/\[/g))}${rstr.repeat (number)}${str.slice (str.search (/\]/g) + 1)}`;
+// };
+// console.log (respeat ('a[3|bc]de'));
 
-respeat ('a[3|bc]de');
+// respeat ('a[3|bc]de');
 
 /**
  * 8 道题
