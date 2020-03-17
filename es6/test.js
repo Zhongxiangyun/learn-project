@@ -89,3 +89,11 @@ outer ();
 * delete animal1.name;
 * console.log (animal1.name);
  */
+
+showName ();
+var showName = function () {
+  console.log (2);
+};
+function showName () {
+  console.log (1);
+}
