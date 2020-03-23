@@ -27,3 +27,13 @@ lineTo(x, y)
 绘制一条从当前位置到指定x以及y位置的直线。
 该方法有两个参数：x以及y ，代表坐标系中直线结束的点。开始点和之前的绘制路径有关，之前路径的结束点就是接下来的开始点，等等。。。开始点也可以通过moveTo()函数改变。
 - [https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial/Drawing_shapes)
+
+## 圆弧
+arc(x, y, radius, startAngle, endAngle, anticlockwise)
+画一个以（x,y）为圆心的以radius为半径的圆弧（圆），从startAngle开始到endAngle结束，按照anticlockwise给定的方向（默认为顺时针）来生成。
+arcTo(x1, y1, x2, y2, radius)
+根据给定的控制点和半径画一段圆弧，再以直线连接两个控制点。
+这里详细介绍一下arc方法，该方法有六个参数：x,y为绘制圆弧所在圆上的圆心坐标。radius为半径。startAngle以及endAngle参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数anticlockwise为一个布尔值。为true时，是逆时针方向，否则顺时针方向。
+
+**注意：arc()函数中表示角的单位是弧度，不是角度。角度与弧度的js表达式:
+弧度=(Math.PI/180)*角度。**
