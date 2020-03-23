@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
-      <!-- <Button type="primary">Primary</Button> -->
-    </div>
+      我是mian
+    </div> -->
     <router-view />
   </div>
 </template>
