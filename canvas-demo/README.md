@@ -37,3 +37,17 @@ arcTo(x1, y1, x2, y2, radius)
 
 **注意：arc()函数中表示角的单位是弧度，不是角度。角度与弧度的js表达式:
 弧度=(Math.PI/180)*角度。**
+
+## 二次贝塞尔曲线及三次贝塞尔曲线 
+quadraticCurveTo(cp1x, cp1y, x, y)
+绘制二次贝塞尔曲线，cp1x,cp1y为一个控制点，x,y为结束点。
+起始点 使用`ctx.moveTo(75,25);`进行设置。
+![二次贝塞尔曲线原理图](https://pic002.cnblogs.com/images/2012/436120/2012101521323283.gif)
+------------
+bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+绘制三次贝塞尔曲线，cp1x,cp1y为控制点一，cp2x,cp2y为控制点二，x,y为结束点。
+![三次贝塞尔曲线](https://pic002.cnblogs.com/images/2012/436120/2012101521423763.gif)
+
+## 矩形
+rect(x, y, width, height)
+绘制一个左上角坐标为（x,y），宽高为width以及height的矩形。
