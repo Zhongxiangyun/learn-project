@@ -1,6 +1,6 @@
-import { withRouter } from 'react-router-dom';
+// import { withRouter } from 'react-router-dom';
 
-// import Home from '../pages/Home';
+import asyncComponent from '../components/AsyncComponent/index';
 // import Order from '../pages/orders/order/index';
 // import Count from '../pages/Count';
 // import Login from '../pages/Login';
@@ -9,10 +9,10 @@ import { withRouter } from 'react-router-dom';
 // import GoodsEdit from '../pages/goods/goods-edit/index'
 // import Agent from '../pages/distribution/agent/index'
 // import Service from '../pages/system/service/index'
-// import Picture from '../pages/system/picture/index'
-import List from '../pages/list/index';
-import Home from '../pages/home/index';
-import Detail from '../pages/detail/index';
+// import Company from '../pages/authManager/company/index'
+// import List from '../pages/list/index';
+// import Home from '../pages/home/index';
+// import Detail from '../pages/detail/index';
 
 export default [
     {
@@ -20,21 +20,21 @@ export default [
         title: '首页',
         hideInMenu: false,
         icon: 'home',
-        Component: Home,
+        Component:  asyncComponent(() => import('../pages/home/index')),
         children: [],
     },
     {
-        path: '/goods',
-        title: '商品',
+        path: '/auth',
+        title: '权限管理',
         hideInMenu: false,
         icon: 'home',
         children: [
             {
-                path: '/goodslist',
-                title: '商品管理',
+                path: '/company',
+                title: '企业管理',
                 hideInMenu: false,
                 icon: 'home',
-                Component: withRouter(Detail),
+                Component: asyncComponent(() => import('../pages/authManager/company/index')),
                 children: [],
             },
             {
@@ -42,7 +42,7 @@ export default [
                 title: '商品分类',
                 hideInMenu: false,
                 icon: 'home',
-                Component: withRouter(Detail),
+                Component: asyncComponent(() => import('../pages/home/index')),
                 children: [],
             },
             {
@@ -50,7 +50,7 @@ export default [
                 title: '商品编辑',
                 hideInMenu: true,
                 icon: 'home',
-                Component: withRouter(List),
+                Component: asyncComponent(() => import('../pages/home/index')),
                 children: [],
             },
         ],
@@ -67,7 +67,7 @@ export default [
                 title: 'home',
                 hideInMenu: false,
                 icon: 'home',
-                Component: withRouter(Detail),
+                Component: asyncComponent(() => import('../pages/home/index')),
                 children: [],
             },
         ],
@@ -83,7 +83,7 @@ export default [
                 title: '订单管理detail',
                 hideInMenu: false,
                 icon: 'home',
-                Component: withRouter(Detail),
+                Component: asyncComponent(() => import('../pages/list/index')),
                 children: [],
             },
         ],
@@ -99,7 +99,7 @@ export default [
                 title: '客服管理list',
                 hideInMenu: false,
                 icon: 'home',
-                Component: withRouter(List),
+                Component: asyncComponent(() => import('../pages/list/index')),
                 children: [],
             },
             {
@@ -107,7 +107,7 @@ export default [
                 title: '图片管理',
                 hideInMenu: false,
                 icon: 'home',
-                Component: withRouter(Detail),
+                Component: asyncComponent(() => import('../pages/home/index')),
                 children: [],
             },
         ],

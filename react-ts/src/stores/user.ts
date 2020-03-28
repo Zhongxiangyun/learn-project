@@ -1,5 +1,5 @@
 import { action, observable } from 'mobx'
-// import { logIn } from '../api/user'
+import { setCookies } from '../utils/cookies'
 export interface IArray {
     [key: string]: any
 }
@@ -38,10 +38,13 @@ export default class UserStore {
     @action
     public handleLogin = async (res: resData) => {
         console.log(res);
-        
+
         // let res = await logIn(userInfo)
         if (res.state === 1) {
-            this.userInfo = { ...this.userInfo, state: res.state, username: res.name_, employeeId: res.employee_id_, webToken: res.web_token }
+            const resReq: UserInfo = { ...this.userInfo, state: res.state, username: res.name_, employeeId: res.employee_id_, webToken: res.web_token }
+            this.userInfo = resReq
+            setCookies('jiuye', res.web_token)
+            localStorage.setItem('jyuser', JSON.stringify(resReq))
         }
         // console.log(this.userInfo);
         // this.arr.push(userInfo)

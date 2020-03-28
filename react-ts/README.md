@@ -137,6 +137,7 @@ npm install babel-plugin-import --save-dev
 ```bash
 npm install babel-plugin-import --save-dev
 ```
+- [分包加载](https://segmentfault.com/a/1190000010067597)
 
 ## router 页面布局
 
@@ -384,6 +385,9 @@ const shouldUseSourceMap = 'false';
 process.env.GENERATE_SOURCEMAP = 'false';
 ```
 
+## Hooks
+- [精读《React Hooks 最佳实践》](https://juejin.im/post/5d75ae7a6fb9a06b0f2407e8)
+<!-- eslint-plugin-react-hooks 插件会自动填写依赖项。-->
 ## 报错
 1. yarn or npm
 ```

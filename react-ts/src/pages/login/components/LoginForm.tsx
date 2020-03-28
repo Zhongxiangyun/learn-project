@@ -36,6 +36,7 @@ class LoginForm extends Component<IProps & RouteProps, State> {
         userStore && userStore.handleLogin(res)
 
         if (res.state === 1) {
+            localStorage.setItem('path', JSON.stringify({ path: '/', region: [] }))
             message.info('登录成功！');
             setTimeout(() => {
                 history.push('/home')

@@ -5,6 +5,8 @@ import {
     MenuUnfoldOutlined,
     MenuFoldOutlined,
 } from '@ant-design/icons';
+import { withRouter } from 'react-router-dom';
+
 import './layoutMain.less'
 import ISider from './component/ISider'
 import IHeader from './component/IHeader'
@@ -21,6 +23,8 @@ const initialState = {
     collapsed: false,
 };
 type State = typeof initialState;
+
+@(withRouter as any)
 class HomeLayout extends Component<IProps, State> {
     state: State = initialState;
     private toggle = () => {
@@ -28,19 +32,22 @@ class HomeLayout extends Component<IProps, State> {
             collapsed: !this.state.collapsed,
         });
     };
+    public handleRouter = (e: string = '/login') => {
+        this.props.history.replace(e)
+    }
     render() {
         const { children } = this.props;
 
         return (
             <Layout className='main'>
-                <ISider collapsed={this.state.collapsed}></ISider>
+                <ISider handleRouter={this.handleRouter} collapsed={this.state.collapsed}></ISider>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }}>
                         {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                             className: 'trigger',
                             onClick: this.toggle,
                         })}
-                        <IHeader></IHeader>
+                        <IHeader handleLogOut={this.handleRouter}></IHeader>
                     </Header>
                     <Content
                         style={{

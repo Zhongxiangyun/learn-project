@@ -65,7 +65,7 @@ async function request({
     const isBase: number = url.search(/(http:|https:)/);
     const reqUrl: string = isBase === -1 ? `${BASE_URL}${url}` : url;
 
-    const token: string = getCookies('token') || '';
+    const token: string = getCookies('jiuye') || '';
     // warning :fetch使用get的时候，不能有body
     const body = mode === 'none' || methods === 'GET'
         ? {}
