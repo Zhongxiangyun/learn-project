@@ -433,6 +433,15 @@ useImperativeHandle(
 1. 自定义hook，必须以use开头
 2. 自定义hook，可以使用我们这些hook（useState,useEffect...）来封装
 
+#### useReducer
+1. `useReducer`和`redux`中的`Reducer`是一样的，说白了`useReducer`就是一个函数
+2. `useReducer()`是个函数，有三个参数，第一个参数reducer，第二个参数是初始值，第三个参数是init。
+3. `useReducer()`返回值是个数组，第一个是`state`，第二个是`dispatch`
+4. `const [state, dispatch] = useReducer(reducer,初始值)`
+`const [state, dispatch] = useReducer(reducer, initialState, init)`
+#### useReducer useContext createContext 实现redux
+
+
 ## 报错
 1. yarn or npm
 ```

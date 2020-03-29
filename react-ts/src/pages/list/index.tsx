@@ -4,6 +4,11 @@ import { observer, inject } from 'mobx-react'
 import { companyList } from '../../api/company'
 import ListItem from './component/ListItem'
 import ListMemo from './component/ListMemo'
+import ListHook from './component/ListHook'
+import ListReducer from './component/ListReducer'
+import ListRedux1 from './component/ListRedux1'
+import ListRedux2 from './component/ListRedux2'
+import { Reducer } from './component/Reducer'
 import { ListContext } from './component/ListContext'
 type IProps = {
     name: string;
@@ -57,14 +62,14 @@ const List: React.FC<IProps> = inject('detailStore')(observer((props: IProps) =>
     useEffect(() => {
         console.log('useEffect');
         handleInit()
-        return ()=>{
+        return () => {
             console.log('useEffect - return');
         }
     }, [handleInit, props]) // 第二个参数设置为[], 表示不必对任何数据， 所以只在首次渲染时调用
     // useLayoutEffect
-    useLayoutEffect(()=>{
+    useLayoutEffect(() => {
         console.log('useLayoutEffect');
-        return ()=>{
+        return () => {
             console.log('useLayoutEffect - return');
         }
     })
@@ -90,6 +95,15 @@ const List: React.FC<IProps> = inject('detailStore')(observer((props: IProps) =>
     const el: React.MutableRefObject<any> = useRef();
     return React.useMemo(() =>
         <React.Fragment>
+            <Reducer>
+                <ListRedux1></ListRedux1>
+                <ListRedux2></ListRedux2>
+            </Reducer>
+            <hr />
+            <ListReducer></ListReducer>
+            <hr />
+            <ListHook></ListHook>
+            <hr />
             <Imperative ref={el}></Imperative>
             <button onClick={() => {
                 console.log(el.current);
@@ -98,6 +112,7 @@ const List: React.FC<IProps> = inject('detailStore')(observer((props: IProps) =>
                 获取ref
             </button>
             <br />
+            <hr />
             <ListContext.Provider value={{ name: count + '' }}>
                 <ListItem></ListItem>
             </ListContext.Provider>
