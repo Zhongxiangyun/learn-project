@@ -388,6 +388,51 @@ process.env.GENERATE_SOURCEMAP = 'false';
 ## Hooks
 - [精读《React Hooks 最佳实践》](https://juejin.im/post/5d75ae7a6fb9a06b0f2407e8)
 <!-- eslint-plugin-react-hooks 插件会自动填写依赖项。-->
+#### useMemo
+`shouldCompoentUpdate`类似作用，在渲染过程中，避免重复渲染的问题。
+当状态或者父组件的属性发生变化时，更新组件
+1. `useMemo`就是用的`memoization`来提高性能。
+2. `Memoization`是`JavaScript`的一种缓存技术。
+如果我们有CPU密集型操作，我们可以通过将初始操作的结果存储在缓存中来优化使用。如果操作必然会再次执行，我们将不再麻烦再次使用我们的CPU，因为相同的结果的结果存储在某个地方，我们只是单纯的返回结果。
+---------
+**记住这个是以空间换速度，所以最好确定你是否值得那么做，有些场景很有必要使用**
+`useMemo()`是一个函数，有两个参数，第一个参数是个函数，第二个参数是个数组。
+`useMemo(()=>{},[默认可以不写，监控所有的状态])`
+`useMemo`和`useEffect`执行的时间不同，`useEffect`是在`componentDidMount`以后执行的，而`useMemo`是在组件渲染过程中执行的。
+#### useCallback
+作用：避免组件重复渲染，提高性能（`useMemo`）
+可以 控制组件什么时候需要更新
+
+同样用到缓存技术，和`useMemo`不同的是，
+`useCallback`缓存的是个函数，是个函数就可以执行
+
+`useCallback()`有两个参数，第一个参数是个函数，第二个参数是个数组。
+`useCallback(()=>{},[可以不写])`;
+
+`const callback = useCallback(()=>{},[可以不写])`;
+`callback`是个函数，可以直接`callback()`执行。
+#### useImperativeHandle
+`useImperativeHandle`可以让你在使用 `ref` 时自定义暴露给父组件的实例值。在大多数情况下，应当避免使用 `ref` 这样的命令式代码。`useImperativeHandle`应当与`forwardRef`一起使用
+```js
+useImperativeHandle(
+    ref,
+    () => {
+        handler
+    },
+    [input],
+)
+```
+#### useLayoutEffect
+和`useEffect`作用一样，在组件生成过程中，可以做一些操作
+不同点：
+1. 执行的时间不同，`useEffect`是在`componentDidMount` 以后执行的，`useLayoutEffect`在浏览器执行绘制之前执行（会阻塞组件的挂载，慎用）
+
+#### 自定义hook
+自定义hook，和普通的函数本质上没有区别，都是做一些函数的封装，方便使用。
+**注意**
+1. 自定义hook，必须以use开头
+2. 自定义hook，可以使用我们这些hook（useState,useEffect...）来封装
+
 ## 报错
 1. yarn or npm
 ```
