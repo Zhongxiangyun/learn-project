@@ -15,7 +15,7 @@ class Home extends Component<IProps> {
     private clickHandler = (): void => {
         // const { homeStore } = this.props;
         // homeStore.setName("Bob");
-        const {setName}=this.props.homeStore
+        const { setName } = this.props.homeStore
         setName("Bob666")
     }
 

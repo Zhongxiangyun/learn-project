@@ -441,6 +441,18 @@ useImperativeHandle(
 `const [state, dispatch] = useReducer(reducer, initialState, init)`
 #### useReducer useContext createContext 实现redux
 
+## 加上`eslint`
+可能已经安装成功。
+```bash
+yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --dev
+```
+> 注意：如果create-react-app用于引导项目，eslint则已经通过将其作为依赖项包含在内react-scripts，因此无需使用进行显式安装yarn。
+-----------
+## 混合代码格式化
+```bash
+yarn add prettier eslint-config-prettier eslint-plugin-prettier --dev
+```
+
 
 ## 报错
 1. yarn or npm
