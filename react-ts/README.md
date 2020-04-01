@@ -452,7 +452,10 @@ yarn add eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin --dev
 ```bash
 yarn add prettier eslint-config-prettier eslint-plugin-prettier --dev
 ```
-
+## 添加 时间 插件
+```bash
+yarn add moment 
+```
 
 ## 报错
 1. yarn or npm
