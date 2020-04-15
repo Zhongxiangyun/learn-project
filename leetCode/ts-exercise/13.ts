@@ -74,7 +74,18 @@ const romanToInt = (s: string): number => {
         CM: 900,
         M: 1000
     }
-    for (let i = 0; i < s.length; i++) { }
-    return 0
+    let res = 0
+    for (let i = 0; i < s.length; ) {
+        const key = s.substring(i, i + 2)
+        if (maps[key]) {
+            res += maps[key]
+            i += 2;
+        }else{
+            res += maps[s.substring(i, i + 1)]
+            i++
+        }
+    }
+    return res
 };
 console.log(romanToInt('MCMXCIV'));
+console.log(romanToInt('LVIII'));
