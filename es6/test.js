@@ -90,10 +90,20 @@ outer ();
 * console.log (animal1.name);
  */
 
-showName ();
-var showName = function () {
-  console.log (2);
-};
+// var showName = function () {
+//   console.log (2);
+// };
 function showName () {
-  console.log (1);
+  console.log (1, 'showName');
+  // 这个 this 是window
+  return () => console.log ('this', this);
 }
+// showName () ();
+
+function testThis () {
+  // 这个 this 是window
+  return () => {
+    return () => console.log ('testThis', this);
+  };
+}
+testThis ()()()
