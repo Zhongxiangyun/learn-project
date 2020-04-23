@@ -22,9 +22,9 @@ import {add, minus, asyncAdd} from '../../actions/counter';
     },
   })
 )
-class List extends Component {
+class Index extends Component {
   config = {
-    navigationBarTitleText: '列表页面',
+    navigationBarTitleText: 'List',
   };
 
   componentWillReceiveProps (nextProps) {
@@ -40,6 +40,7 @@ class List extends Component {
   render () {
     return (
       <View className='index'>
+        <Button className='add_btn' onClick={()=>{Taro.navigateTo({url: '/pages/list/list'})}}>跳转list</Button>
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
@@ -50,4 +51,4 @@ class List extends Component {
   }
 }
 
-export default List;
+export default Index;
