@@ -3,8 +3,9 @@ import {View, Button, Text} from '@tarojs/components';
 import {connect} from '@tarojs/redux';
 
 import {add, minus, asyncAdd} from '../../actions/counter';
+// import SplitPane from "./component/SplitPane"
+import './list.scss';
 
-// import './index.scss';
 
 @connect (
   ({counter}) => ({
@@ -23,23 +24,28 @@ import {add, minus, asyncAdd} from '../../actions/counter';
   })
 )
 class Index extends Component {
-  config = {
-    navigationBarTitleText: 'List',
-  };
-
+  
   componentWillReceiveProps (nextProps) {
     console.log (this.props, nextProps);
   }
 
-  componentWillUnmount () {}
-
   componentDidShow () {}
 
   componentDidHide () {}
-
+  config = {
+    navigationBarTitleText: 'List',
+  };
   render () {
     return (
       <View className='index'>
+          {/* <SplitPane
+            left={
+        <Text>Left</Text>
+      }
+            right={
+        <Text>Right</Text>
+      }
+          /> */}
         <Button className='add_btn' onClick={()=>{Taro.navigateTo({url: '/pages/list/list'})}}>跳转list</Button>
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
