@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/axios/0.19.2/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>ajax axios fetch</h1>
+    <i>以下请求均存在跨域</i>
+    <br>
+    <button id="ajax">ajax 请求</button>
+    <button id="axios">axios 请求</button>
+    <button id="fetch">fetch 请求</button>
+    <div class="content">结果显示</div>
+    <script>
+        const baseUrl = "http://47.99.131.97:9092/"
+        const url = baseUrl + '2/share_page/share_moment'
+        const data = {
+            momentsId: '4aa990978710418cb68754c35529517e'
+        }
+        function ajaxReq(url = '', data = {}, cb) {
+            $.ajax({
+                headers: {
+                    // Authorization: localStorage.getItem('token'),//设置headers  token放到这个地方
+                },
+                type: "POST",
+                dataType: 'json',
+                // contentType: 'application/json;charset=UTF-8',
+                url: url,
+                data: data,//JSON.stringify(data)
+                success: function (res) {
+                    console.log("Data Saved: ", res);
+                    cb && cb(res)
+                }
+            });
+        }
+        function axiosReq(url = '', data = {}, cb) {
+            axios.post(url, data).then((res) => {
+                cb && cb(res)
+                if (res.status === 200 && res.data.state === 1) {
+                    console.log(res.data)
+                }
+            }).catch((error) => {
+                throw new Error(error)
+            })
+        }
+        function fetchReq(url = '', data = {}, cb) {
+            return fetch(url, {
+                body: JSON.stringify(data), // must match 'Content-Type' header
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, same-origin, *omit
+                headers: {
+                    'user-agent': 'Mozilla/4.0 MDN Example',
+                    'content-type': 'application/json'
+                },
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, cors, *same-origin
+                redirect: 'follow', // manual, *follow, error
+                referrer: 'no-referrer', // *client, no-referrer
+            }).then(response => cb && cb(response.json()))
+        }
+        $('#ajax').on('click', function () {
+            ajaxReq(url, data, function (res) {
+                $('.content').empty().append(JSON.stringify(res));
+            })
+        })
+        $('#axios').on('click', function () {
+            axiosReq(url, data, function () {
+                $('.content').empty().append(JSON.stringify(res));
+            });
+        })
+        $('#fetch').on('click', function () {
+            fetchReq(url, data, function () {
+                $('.content').empty().append(JSON.stringify(res));
+            });
+        })
+
+    </script>
+</body>
+
+</html>
