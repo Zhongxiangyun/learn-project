@@ -5,10 +5,10 @@ export default function SplitPane(props) {
     return (
       <View className='SplitPane'>
         <View className='SplitPane-left'>
-          {props.left}
+          {props.renderLeft}
         </View>
         <View className='SplitPane-right'>
-          {props.right}
+          {props.renderRight}
         </View>
       </View>
     );
