@@ -20,6 +20,7 @@ export default class LayoutResize extends React.PureComponent {
       dragging: false,
     });
   };
+  // 可拖拽
   handleMouseMove = evt => {
     let siderWidth = this.state.siderWidth + evt.pageX - this.state.startPageX;
     if (siderWidth < 20 || siderWidth > 300) return;
